@@ -1,3 +1,4 @@
+import { APP_ROUTES } from './app.route';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -12,7 +13,6 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component';
 import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +26,8 @@ import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component
     BreadcrumbsComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    APP_ROUTES
   ],
   providers: [],
   bootstrap: [AppComponent]
