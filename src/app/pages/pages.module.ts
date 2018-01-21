@@ -5,6 +5,8 @@ import { ProgressComponent } from './progress/progress.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages.component';
 import { PAGES_ROUTES } from './pages.routes';
+import {FormsModule} from '@angular/forms';
+import { IncrementadorComponent } from '../components/incrementador/incrementador.component';
 
 
 
@@ -13,17 +15,19 @@ import { PAGES_ROUTES } from './pages.routes';
         PagesComponent,
         DashboardComponent,
         ProgressComponent,
-        Graficas1Component
+        Graficas1Component,
+         IncrementadorComponent
     ],
     exports: [
         DashboardComponent,
         ProgressComponent,
         Graficas1Component,
-        
+        PagesComponent
     ],
-    imports:[
+    imports: [
+        FormsModule,
         SharedModule,
-        PAGES_ROUTES
+        PAGES_ROUTES,
 
     ]
 
