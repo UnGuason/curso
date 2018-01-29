@@ -1,5 +1,3 @@
-import { ServiceModule } from './services/service.module.';
-
 //RUTEAS
 import { APP_ROUTES } from './app.route';
 
@@ -13,7 +11,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { PagesComponent } from './pages/pages.component';
 import { RegisterComponent } from './login/register.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ServiceModule } from './services/service.module';
 
 
 @NgModule({
@@ -28,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     APP_ROUTES, 
     PagesModule,
     FormsModule,
-    ServiceModule
+    ServiceModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,6 @@
 import { Component, OnInit , OnDestroy } from '@angular/core';
 // tslint:disable-next-line:import-blacklist
 import { Observable } from 'rxjs/Rx';
-import { setInterval } from 'timers';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -56,15 +55,13 @@ export class RxjsComponent implements OnInit, OnDestroy {
     .map((res: any) => {
         return res.valor;
     }).filter( (aux, index ) => {
-
-      if( aux % 2 === 1) {
+      if ( aux % 2 === 1) {
           return true;
       } else {
         return false;
       }
-      console.log(index);
       
-      return true;
+      
     });
 
   }
