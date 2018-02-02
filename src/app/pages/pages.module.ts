@@ -1,3 +1,4 @@
+import { PipesModule } from './../pipes/pipes.module';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { Graficas1Component } from './graficas1/graficas1.component';
@@ -12,6 +13,7 @@ import { GraficoDonaComponent } from '../components/dona/grafico-dona.component'
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs.component/rxjs.component.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -26,7 +28,8 @@ import { RxjsComponent } from './rxjs.component/rxjs.component.component';
          GraficoDonaComponent,
          AccountSettingsComponent,
          PromesasComponent,
-         RxjsComponent
+         RxjsComponent,
+         ProfileComponent
     ],
     exports: [
         DashboardComponent,
@@ -35,10 +38,11 @@ import { RxjsComponent } from './rxjs.component/rxjs.component.component';
         PagesComponent
     ],
     imports: [
+        PAGES_ROUTES,
         FormsModule,
         SharedModule,
-        PAGES_ROUTES,
-        ChartsModule
+        ChartsModule,
+        PipesModule
 
     ]
 

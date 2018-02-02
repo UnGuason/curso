@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
-import * as swal from 'sweetalert';
+// import * as swal from 'sweetalert';
+import swal from 'sweetalert';
+
 import { URL_SERVICES } from '../../config/config';
 import { Router } from '@angular/router';
 
@@ -73,7 +75,7 @@ this.cargarStorage();
       localStorage.setItem('email',usuario.email);
       
     }else{
-localStorage.removeItem('email');
+        localStorage.removeItem('email');
     }
 
     let url=URL_SERVICES+'/login';
@@ -97,9 +99,24 @@ localStorage.removeItem('email');
 
       return resp.usuario;
     });
-
-
-
   }
+  actualizarUsuario(usuario:Usuario,token){
+    let url = URL_SERVICES + '/usuario/';
+    url +=usuario._id;
+    url+='?token='+ this.token;
+    console.log(url);
 
+   return this.http.put(url,usuario)
+   .map((data:any)=>{
+     console.log(data.usuarios);
+     this.usuario.nombre=data.usuarios.nombre;
+     this.usuario.email=data.usuarios.email;
+     this.usuario._id= data.usuarios._id;
+
+     this.guardarStorage(this.usuario._id,this.token,this.usuario);
+     swal('usaurio actualizado', usuario.email,'success');
+
+     return data;
+  });
+}
 }

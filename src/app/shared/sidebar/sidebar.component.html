@@ -9,13 +9,13 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="user-profile">
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img src="../assets/images/users/profile.png" alt="user" /><span class="hide-menu">Steave Jobs </span></a>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img [src]="_usuario.usuario.imagen | imagen" alt="user" /><span class="hide-menu">{{_usuario.usuario.nombre}}</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li ><a href="javascript:void()">My Profile </a></li>
+                                <li ><a routerLinkActive="active" routerLink="/perfil">Mi Perfil </a></li>
                                 <li ><a routerLinkActive="active" routerLink="/settings">Settings</a></li>
                                 <li><a routerLinkActive="active" routerLink="/progress">Progress</a></li>
                                 <li><a routerLinkActive="active" routerLink="/graficas1">Graficos</a></li>
-                                <li><a (click)="_usuario.logOut()" routerLink="/login">logout</a></li>
+                                <li><a (click)="_usuario.logOut()" routerLink="/login">Logout</a></li>
 
                             </ul>
                         </li>
