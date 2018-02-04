@@ -6,30 +6,30 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ImagenPipe implements PipeTransform {
 
-  transform(img: string, tipo: string ='usuario'): any {
-let url = URL_SERVICES + 'img/';
+  transform(img: string, tipo: string ='usuarios'): any {
+let url = URL_SERVICES + '/imagenes';
 if(!img){
-   url += 'usuarios/asd';
+  img='default';
 }
 if(img.indexOf('https') >=0 ){
   return img;
 }
 switch (tipo) {
   case 'usuarios':
-    url += '/usuarios/' + img;
-    break;
+  url += '/usuarios/' + img;
+  break;
   case 'medicos':
-    break;
-    url += '/medicos/' + img;
-    break;
+  url += '/medicos/' + img;
+  break;
   case 'hospitales':
-    url += '/hospitales/' + img;
-    break;
-
+  url += '/hospitales/' + img;
+  break;
+  
   default:
-    console.log('tipo de imagen no existe');
-    break;
+  console.log('tipo de imagen no existe');
+  break;
 }
+
 return url;
 
    

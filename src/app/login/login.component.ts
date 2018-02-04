@@ -62,12 +62,14 @@ export class LoginComponent implements OnInit {
     }
     let usuario= new Usuario(
       'null',form.value.correo,
-      form.value.password
+             form.value.password
       
     );
 
 
-    this._usuario.login(usuario,form.value.recuerdame).subscribe(data=>{this.route.navigate(['/dashboard']);
+    this._usuario.login(usuario,form.value.recuerdame).subscribe(data=>{
+      console.log('kigun component 41');
+      this.route.navigate(['/dashboard']);
   });
     console.log(form.valid);
     console.log(form.value);

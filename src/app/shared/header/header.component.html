@@ -159,14 +159,14 @@
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img [src]="_usuario.usuario.imagen" alt="user" class="profile-pic" />
+                        <img [src]="_usuario.usuario.imagen | imagen" alt="user" class="profile-pic" />
                     </a>
                     <div class="dropdown-menu dropdown-menu-right animated flipInY">
                         <ul class="dropdown-user">
                             <li>
                                 <div class="dw-user-box">
                                     <div class="u-img">
-                                        <img [src]="_usuario.usuario.imagen" alt="user">
+                                        <img [src]="_usuario.usuario.imagen | imagen " alt="user">
                                     </div>
                                     <div class="u-text">
                                         <h4>{{_usuario.usuario.nombre}}</h4>

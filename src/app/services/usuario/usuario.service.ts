@@ -1,9 +1,9 @@
+import { UploadService } from './../upload/upload.service';
+import { Usuario } from './../../models/usuario.model';
 import { stringify } from '@angular/core/src/util';
 import { Injectable } from '@angular/core';
-import { Usuario } from '../../models/usuario.model';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
-// import * as swal from 'sweetalert';
 import swal from 'sweetalert';
 
 import { URL_SERVICES } from '../../config/config';
@@ -16,8 +16,10 @@ export class UsuarioService {
 
 usuario:Usuario;
 token:string;
+imagenSubir:File;
   constructor(public http:HttpClient,
-              private router:Router) {
+              private router:Router,
+              private _uploadService:UploadService) {
 this.cargarStorage();
  }
 
@@ -68,8 +70,6 @@ this.cargarStorage();
   }
 
   login(usuario:Usuario, recuerdame:Boolean=false){
-    console.log(recuerdame);
-
     if (recuerdame) {
       
       localStorage.setItem('email',usuario.email);
@@ -82,6 +82,10 @@ this.cargarStorage();
     return this.http.post(url,usuario)
     .map((res:any)=>{
       console.log(res);
+      if(!res.usuario.imagen){
+        res.usuario.imagen='null';
+
+      }
       this.guardarStorage(res.id,res.token,res.usuario);
    
         return true;
@@ -117,6 +121,22 @@ this.cargarStorage();
      swal('usaurio actualizado', usuario.email,'success');
 
      return data;
+  });
+}
+
+cambiarImagen(archivo:File,id: string){
+  this._uploadService.subirArchivo(archivo,'usuarios',id).then((resp:any)=>{
+    console.log(resp.usuario.imagen);
+    this.usuario.imagen = resp.usuario.imagen;
+   this.guardarStorage(this.usuario._id ,this.token,this.usuario );
+
+    swal('imagen actualizada',this.usuario.email,'success');
+
+    
+
+  }).catch(error=>{
+    console.log(error);
+
   });
 }
 }
