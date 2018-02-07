@@ -35,7 +35,7 @@ imagenTemp:string;
       this.usuario.email= data.email;
 
     }
-    this._usuario.actualizarUsuario(this.usuario,this.token).subscribe
+    this._usuario.actualizarUsuario(this.usuario).subscribe
     (datos=> console.log(datos));
   }
   seleccionImagen(archivo:File ) {

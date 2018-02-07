@@ -9,6 +9,7 @@ import { Graficas1Component } from './graficas1/graficas1.component';
 import { RouterModule } from '@angular/router';
 import { RxjsComponent } from './rxjs.component/rxjs.component.component';
 import { LoginGuardGuard } from '../services/service.index';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 
 
@@ -21,12 +22,13 @@ const pagesRoutes: Routes = [
             {path : 'dashboard', component: DashboardComponent, data: { titulo : 'Dashboard'}},
             {path : 'progress', component: ProgressComponent  , data: { titulo : 'Progress'} },
             {path : 'graficas1', component: Graficas1Component , data: { titulo : 'Gráficas'} },
-            
             {path : 'settings', component: AccountSettingsComponent , data: { titulo : 'Configuración'} },
             {path : 'promesas', component: PromesasComponent , data: { titulo : 'Promesas'} },
             {path : 'rxjs', component: RxjsComponent , data: { titulo : 'Observables'} },
             {path : 'perfil', component: ProfileComponent , data: { titulo : 'Perfil de usuario'} },
-            
+            //Mantenimientos
+            {path : 'usuarios', component: UsuariosComponent , data: { titulo : 'Mantenimiento Usuarios'} },
+
             {path : '', redirectTo: '/dashboard', pathMatch: 'full'}
 
         ]

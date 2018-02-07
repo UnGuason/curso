@@ -1,3 +1,4 @@
+import { URL_SERVICES } from './../../config/config';
 import { UploadService } from './../upload/upload.service';
 import { Usuario } from './../../models/usuario.model';
 import { stringify } from '@angular/core/src/util';
@@ -6,7 +7,6 @@ import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import swal from 'sweetalert';
 
-import { URL_SERVICES } from '../../config/config';
 import { Router } from '@angular/router';
 
 
@@ -63,6 +63,7 @@ this.cargarStorage();
     let url= URL_SERVICES + '/login/google';
     return this.http.post(url,{token})
     .map((res:any)=>{
+      console.log(res);
       this.guardarStorage(res.id,res.token,res.usuario);
       return true;
     });
@@ -104,7 +105,7 @@ this.cargarStorage();
       return resp.usuario;
     });
   }
-  actualizarUsuario(usuario:Usuario,token){
+  actualizarUsuario(usuario:Usuario){
     let url = URL_SERVICES + '/usuario/';
     url +=usuario._id;
     url+='?token='+ this.token;
@@ -116,9 +117,11 @@ this.cargarStorage();
      this.usuario.nombre=data.usuarios.nombre;
      this.usuario.email=data.usuarios.email;
      this.usuario._id= data.usuarios._id;
+      if(usuario._id === this.usuario._id){
+        this.guardarStorage(this.usuario._id,this.token,this.usuario);
 
-     this.guardarStorage(this.usuario._id,this.token,this.usuario);
-     swal('usaurio actualizado', usuario.email,'success');
+      }
+    //  swal('usaurio actualizado', usuario.email,'success');
 
      return data;
   });
@@ -138,5 +141,22 @@ cambiarImagen(archivo:File,id: string){
     console.log(error);
 
   });
+}
+
+cargarUsuarios(desde:number=0){
+  let url = URL_SERVICES + '/usuario?desde='+ desde;
+  return this.http.get(url);
+
+}
+buscarUsuario(termino:string){
+  let url= URL_SERVICES + `/busqueda/coleccion/usuario/${termino}` ;
+return this.http.get(url);
+}
+
+borrarUsuario(usuario:Usuario){
+  
+  let url = URL_SERVICES + `/usuario/borrar${usuario._id}?token=${this.token}`;
+  console.log(url);
+  return this.http.delete(url);
 }
 }

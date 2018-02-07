@@ -15,6 +15,8 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs.component/rxjs.component.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CommonModule } from '@angular/common';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { ModalUplodadComponent } from './modal-uplodad/modal-uplodad.component';
 
 
 
@@ -30,7 +32,9 @@ import { CommonModule } from '@angular/common';
          AccountSettingsComponent,
          PromesasComponent,
          RxjsComponent,
-         ProfileComponent
+         ProfileComponent,
+         UsuariosComponent,
+         ModalUplodadComponent
     ],
     exports: [
         DashboardComponent,

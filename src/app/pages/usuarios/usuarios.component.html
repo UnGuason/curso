@@ -1,0 +1,132 @@
+<div class="row animated fadeIn"> 
+<div class="col-12">
+  <div class="card">
+    <div class="card-body">
+      <input #input type="text" (keyup)="buscarUsuario(input.value)" class="form-control" placeholder="buscar" />
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="row" *ngIf="cargando" >
+  <div class="col-12">
+    <div class="alert alert-warning text-center">
+      <strong>Cargando</strong>
+      <br>
+      <i class="fa fa-refresh fa-spin fa-2x"></i>
+    
+    </div>
+  </div>
+</div>
+
+<div class="row animated fadeIn"> 
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 lclass="card-title">Usuarios registrados (<small>{{totalRegistros}}</small> )</h3>
+          <div class="table-responsive m-t-40">
+          <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+              <thead>
+                  <tr>
+                      <th>Imagen </th>
+                      <th>Correo</th>
+                      <th class="sorting">Nombre</th>
+                      <th>Role</th>
+                      <th>Auth</th>
+                      <th>Salary</th>
+                  </tr>
+              </thead>   
+             <tbody>
+              <tr *ngFor="let item of usuarios" >
+                <td class="w70"> 
+                <img (click)="mostrarModal(item._id )" [src]="item.imagen | imagen" class="img50 img-circle pointer">
+            </td>
+               
+                <td>{{item.email}}</td>
+                <td>{{item.nombre}}</td>
+                <td>
+                  <select [(ngModel)]="item.role" name="role" class="form-control">
+                 <option value="ADMIN_ROLE">ADMIN_ROLE</option>
+                 <option value="USER_ROLE">USER_ROLE</option>
+                  </select>
+                  <!-- {{item.role}} -->
+                </td>
+                <td>
+                  <label *ngIf="item.google"  class="label label-danger">Google</label>
+                  <label *ngIf="!item.google"  class="label label-primary">Normal</label>
+               </td>
+                <td></td>
+                <td>
+                  <button (click)="guardarUsuario(item)" class="btn btn-primary">
+                  <i class="fa fa-save"></i>
+                </button>
+                <button (click)="borrarUsuario(item)" class="btn btn-danger">
+                    <i class="fa fa-trash-o"></i>
+                  </button>
+
+                </td>
+                
+              </tr>
+
+             </tbody>           
+
+            </table>
+        </div>
+        <button  (click)="cambiarDesde(-5)" class="btn btn-secondary">Anteriores
+      </button>
+            <button (click)="cambiarDesde(5)"class="btn btn-secondary">Siguientes
+              </button>
+       
+            </div>
+    
+        
+          </div>
+    </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable();
+            $(document).ready(function() {
+                var table = $('#example').DataTable({
+                    "columnDefs": [{
+                        "visible": false,
+                        "targets": 2
+                    }],
+                    "order": [
+                        [2, 'asc']
+                    ],
+                    "displayLength": 25,
+                    "drawCallback": function(settings) {
+                        var api = this.api();
+                        var rows = api.rows({
+                            page: 'current'
+                        }).nodes();
+                        var last = null;
+                        api.column(2, {
+                            page: 'current'
+                        }).data().each(function(group, i) {
+                            if (last !== group) {
+                                $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                                last = group;
+                            }
+                        });
+                    }
+                });
+                // Order by the grouping
+                $('#example tbody').on('click', 'tr.group', function() {
+                    var currentOrder = table.order()[0];
+                    if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                        table.order([2, 'desc']).draw();
+                    } else {
+                        table.order([2, 'asc']).draw();
+                    }
+                });
+            });
+        });
+        $('#example23').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+        </script>
